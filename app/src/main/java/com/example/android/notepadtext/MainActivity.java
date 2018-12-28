@@ -4,14 +4,19 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import android.widget.Toolbar;
+import android.widget.TextView;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private List<Note> noteList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +44,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+
+        final RecyclerView recyclerView = findViewById(R.id.recycle_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        final NoteAdapter adapter = new NoteAdapter(noteList);
+        recyclerView.setAdapter(adapter);
+
+        Note note = (Note) getIntent().getSerializableExtra("newNote");
+        adapter.addNote(note);
+        recyclerView.setAdapter(adapter);
+
+
     }
+
 }

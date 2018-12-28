@@ -17,10 +17,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView NoteName;
+        TextView TimeShow;
 
         public ViewHolder(View view){
             super(view);
             NoteName = view.findViewById(R.id.note_message);
+            TimeShow = view.findViewById(R.id.time_shows);
+
         }
     }
 
@@ -44,6 +47,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Note Note = myNoteList.get(position);
         holder.NoteName.setText(Note.getMessage());
+        holder.TimeShow.setText(Note.getYear()+"/"+Note.getMonth()+"/"+Note.getDay());
     }
 
     @Override

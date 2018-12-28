@@ -9,6 +9,7 @@ import android.view.View;
 
 public class DeleteActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
