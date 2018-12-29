@@ -5,6 +5,7 @@
     android:orientation="horizontal">
 
     <TextView
+        android:textSize="36dp"
         android:id="@+id/title_text"
         android:layout_width="0dp"
         android:layout_weight="1"

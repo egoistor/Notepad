@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:textSize="36dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="编辑"/>

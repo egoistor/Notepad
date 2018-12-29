@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,7 +18,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private List<Note> noteList = new ArrayList<>();
-
+    private SortedList<Note> mDataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,17 +46,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         final RecyclerView recyclerView = findViewById(R.id.recycle_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         final NoteAdapter adapter = new NoteAdapter(noteList);
+        mDataList = new SortedList<>(Note.class, new NoteListCallback(adapter));
+        mDataList.beginBatchedUpdates();
+        mDataList.endBatchedUpdates();
         recyclerView.setAdapter(adapter);
 
         Note note = (Note) getIntent().getSerializableExtra("newNote");
-        adapter.addNote(note);
+        mDataList.beginBatchedUpdates();
+        mDataList.add(note);
+        mDataList.endBatchedUpdates();
         recyclerView.setAdapter(adapter);
 
 
+        adapter.setOnItemClickListener(new NoteAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //TODO
+            }
+        });
+
+        adapter.setOnItemLongClickListener(new NoteAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                //TODO
+            }
+        });
+        recyclerView.setAdapter(adapter);
     }
 
 }
